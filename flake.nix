@@ -7,16 +7,30 @@
   inputs.lean.url = "github:leanprover/lean4?ref=v4.2.0";
   # Here we will add our dependency on Mathlib
   # I stole this from https://github.com/stites/templates/blob/492ffebb29b479d3ee85fa24beb214ecb227fbb0/lean4/flake.nix
-  inputs.mathlib4.url = "github:leanprover-community/mathlib4?ref=v4.2.0";
-  inputs.mathlib4.flake = false;
-  inputs.aesop.url = "github:JLimperg/aesop?ref=v4.2.0";
-  inputs.aesop.flake = false;
-  inputs.quote.url = "github:leanprover-community/quote4";
-  inputs.quote.flake = false;
-  inputs.std4.url = "github:leanprover/std4?ref=v4.2.0";
-  inputs.std4.flake = false;
-  inputs.proofWidgets4.url = "github:leanprover-community/ProofWidgets4?ref=v0.0.22";
-  inputs.proofWidgets4.flake = false;
+  inputs.mathlib4 = {
+    url = "github:leanprover-community/mathlib4?ref=v4.2.0";
+    flake = false;
+  };
+  inputs.std4 = {
+    url = "github:leanprover/std4?ref=v4.2.0";
+    flake = false;
+  };
+  inputs.aesop = {
+    url = "github:JLimperg/aesop?ref=v4.2.0";
+    flake = false;
+  };
+  inputs.quote = {
+    url = "github:leanprover-community/quote4";
+    flake = false;
+  };
+  inputs.proofWidgets4 = {
+    url = "github:leanprover-community/ProofWidgets4?ref=v0.0.22";
+    flake = false;
+  };
+  inputs.cli = {
+    url = "github:leanprover/lean4-cli?ref=v2.2.0-lv4.0.0";
+    flake = false;
+  };
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, lean, flake-utils, ... }@inputs: flake-utils.lib.eachDefaultSystem (system:
@@ -37,15 +51,22 @@
         src = inputs.quote;
         precompilePackage = true;
       };
+      cli = leanPkgs.buildLeanPackage {
+        name = "Cli";
+        src = inputs.cli;
+        precompilePackage = true;
+      };
       std4 = leanPkgs.buildLeanPackage {
         name = "Std";
         src = inputs.std4;
         precompilePackage = true;
+        deps = [ cli ];
       };
       proofWidgets4 = leanPkgs.buildLeanPackage {
         name = "ProofWidgets";
         src = inputs.proofWidgets4;
         precompilePackage = true;
+        deps = [ std4 ];
       };
       mathlib = leanPkgs.buildLeanPackage {
         name = "Mathlib";

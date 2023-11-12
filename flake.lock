@@ -17,6 +17,23 @@
         "type": "github"
       }
     },
+    "cli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695286356,
+        "narHash": "sha256-X6sm6Gzu1Pkl7Ww/w947DmtV9OE+DATEqsvRy+6JdXI=",
+        "owner": "leanprover",
+        "repo": "lean4-cli",
+        "rev": "2245a1dda89cbd3e0340527b8682015b99bcec03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leanprover",
+        "ref": "v2.2.0-lv4.0.0",
+        "repo": "lean4-cli",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -225,6 +242,7 @@
     "root": {
       "inputs": {
         "aesop": "aesop",
+        "cli": "cli",
         "flake-utils": "flake-utils",
         "lean": "lean",
         "mathlib4": "mathlib4",
