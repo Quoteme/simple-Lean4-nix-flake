@@ -223,7 +223,7 @@
         "type": "github"
       }
     },
-    "quote": {
+    "quote4": {
       "flake": false,
       "locked": {
         "lastModified": 1699162668,
@@ -246,8 +246,12 @@
         "flake-utils": "flake-utils",
         "lean": "lean",
         "mathlib4": "mathlib4",
+        "nixpkgs": [
+          "lean",
+          "nixpkgs"
+        ],
         "proofWidgets4": "proofWidgets4",
-        "quote": "quote",
+        "quote4": "quote4",
         "std4": "std4"
       }
     },
